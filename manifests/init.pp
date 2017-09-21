@@ -21,10 +21,10 @@ class repo_mssql () {
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    source => 'puppet:///modules/repo_mysql/microsoft.asc',
+    source => 'puppet:///modules/repo_mssql/microsoft.asc',
   }
   ->
-  yumrepo { "repo_mssql":
+  yumrepo { "mssql_repo":
       baseurl  => "${baseurl}",
       descr    => "Microsoft SQL Server"
   }
