@@ -7,12 +7,30 @@
 # @example
 #   include mssql_linux::os::redhat
 class repo_mssql::os::redhat {
-  class { 'repo_msprod':
-    repourl           => 'https://packages.microsoft.com/rhel/7/mssql-server/',
-    enable_mirrorlist => false,
+
+  # Limit to version 7 as pre-req
+  case $::operatingsystem {
+    centos, redhat, amazon, fedora: {
+      $baseurl = "https://packages.microsoft.com/rhel/7/mssql-server/"
+    }
+    default: {
+      fail('ERROR: Your operating system is not supported for the MySQL repository')
+    }
+  } 
+
+  Yumrepo {
+    enabled  => 1,
+    gpgcheck => 1,
+    gpgkey   => 'https://packages.microsoft.com/keys/microsoft.asc',
+  } 
+
+  yumrepo { "mssql-repo":
+      baseurl  => "${baseurl}",
+      descr    => "Microsoft SQL Server"
   }
 
   package { 'mssql-server': 
     ensure => present
   }
+
 }
