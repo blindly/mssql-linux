@@ -8,13 +8,13 @@ class repo_mssql () {
     default: {
       fail('ERROR: Your operating system is not supported for the MySQL repository')
     }
-  } ->
+  } 
 
   Yumrepo {
     enabled  => 1,
     gpgcheck => 1,
     gpgkey   => 'file:///etc/pki/rpm-gpg/microsoft.asc',
-  } ->
+  } 
 
   file { '/etc/pki/rpm-gpg/microsoft.asc':
     ensure => present,
@@ -23,7 +23,7 @@ class repo_mssql () {
     mode   => '0644',
     source => 'puppet:///modules/repo_mssql/microsoft.asc',
   }
-  ->
+
   yumrepo { "packages-microsoft-com-mssql-server":
       baseurl  => "${baseurl}",
       descr    => "Microsoft SQL Server"
