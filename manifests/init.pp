@@ -3,18 +3,18 @@ class repo_mssql () {
 
   case $::operatingsystem {
     centos, redhat, amazon, fedora: {
-      $baseurl = "https://packages.microsoft.com/config/rhel/${::os_maj_version}/mssql-server.repo"
+      $baseurl = "https://packages.microsoft.com/config/rhel/7/mssql-server.repo"
     }
     default: {
       fail('ERROR: Your operating system is not supported for the MySQL repository')
     }
-  }
+  } ->
 
   Yumrepo {
     enabled  => 1,
     gpgcheck => 1,
     gpgkey   => 'file:///etc/pki/rpm-gpg/microsoft.asc',
-  }
+  } ->
 
   file { '/etc/pki/rpm-gpg/microsoft.asc':
     ensure => present,
@@ -24,7 +24,7 @@ class repo_mssql () {
     source => 'puppet:///modules/repo_mssql/microsoft.asc',
   }
   ->
-  yumrepo { "mssql_repo":
+  yumrepo { "packages-microsoft-com-mssql-server":
       baseurl  => "${baseurl}",
       descr    => "Microsoft SQL Server"
   }
