@@ -3,7 +3,7 @@ class repo_mssql () {
 
   case $::operatingsystem {
     centos, redhat, amazon, fedora: {
-      $baseurl = "https://packages.microsoft.com/config/rhel/7/mssql-server/"
+      $baseurl = "https://packages.microsoft.com/rhel/7/mssql-server/"
     }
     default: {
       fail('ERROR: Your operating system is not supported for the MySQL repository')
