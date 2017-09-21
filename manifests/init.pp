@@ -16,7 +16,7 @@ class repo_mssql () {
     gpgkey   => 'https://packages.microsoft.com/keys/microsoft.asc',
   } 
 
-  yumrepo { "packages-microsoft-com-mssql-server":
+  yumrepo { "mssql-repo":
       baseurl  => "${baseurl}",
       descr    => "Microsoft SQL Server"
   }
