@@ -8,7 +8,7 @@
 #   include mssql_linux::os::redhat
 class repo_mssql::os::redhat {
   class { 'repo_msprod':
-    repourl           => 'https://packages.microsoft.com/config/rhel/7/mssql-server.repo',
+    repourl           => 'https://packages.microsoft.com/rhel/7/mssql-server/',
     enable_mirrorlist => false,
   }
 
